@@ -1,0 +1,54 @@
+// Interfaz Strategy
+interface MetodoPago {
+    void pagar(int cantidad);
+}
+
+// Estrategia 1
+class PagoTarjeta implements MetodoPago {
+
+    @Override
+    public void pagar(int cantidad) {
+        System.out.println("Pago realizado con tarjeta: $" + cantidad);
+    }
+}
+
+// Estrategia 2
+class PagoPayPal implements MetodoPago {
+
+    @Override
+    public void pagar(int cantidad) {
+        System.out.println("Pago realizado con PayPal: $" + cantidad);
+    }
+}
+
+// Clase contexto
+class CarritoCompras {
+
+    private MetodoPago metodoPago;
+
+    // Permite cambiar el método de pago
+    public void setMetodoPago(MetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+
+    // Ejecuta el método seleccionado
+    public void procesarPago(int cantidad) {
+        metodoPago.pagar(cantidad);
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        CarritoCompras carrito = new CarritoCompras();
+
+        // Pago con tarjeta
+        carrito.setMetodoPago(new PagoTarjeta());
+        carrito.procesarPago(1500);
+
+        // Pago con PayPal
+        carrito.setMetodoPago(new PagoPayPal());
+        carrito.procesarPago(2500);
+    }
+}

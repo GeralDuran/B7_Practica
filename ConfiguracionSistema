@@ -1,0 +1,48 @@
+class ConfiguracionSistema {
+
+    // Variable estática que almacena la única instancia
+    private static ConfiguracionSistema instancia;
+
+    // Variable de ejemplo
+    private String nombreSistema;
+
+    // Constructor privado para evitar crear objetos externos
+    private ConfiguracionSistema() {
+        nombreSistema = "Sistema Escolar";
+    }
+
+    // Método público para obtener la única instancia
+    public static ConfiguracionSistema getInstancia() {
+
+        // Si no existe la instancia, se crea
+        if (instancia == null) {
+            instancia = new ConfiguracionSistema();
+        }
+
+        return instancia;
+    }
+
+    public void mostrarMensaje() {
+        System.out.println("Bienvenido a: " + nombreSistema);
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Obtener la instancia
+        ConfiguracionSistema sistema1 = ConfiguracionSistema.getInstancia();
+
+        // Mostrar mensaje
+        sistema1.mostrarMensaje();
+
+        // Obtener nuevamente la instancia
+        ConfiguracionSistema sistema2 = ConfiguracionSistema.getInstancia();
+
+        // Comparar si ambos objetos son iguales
+        if (sistema1 == sistema2) {
+            System.out.println("Ambos objetos son la misma instancia.");
+        }
+    }
+}
